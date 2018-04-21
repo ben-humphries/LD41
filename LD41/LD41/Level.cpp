@@ -2,9 +2,9 @@
 
 
 
-Level::Level()
+Level::Level(std::string dir)
 {
-	if (!music.openFromFile("test.ogg")) {
+	if (!music.openFromFile(dir)) {
 		printf("could not open music file");
 	}
 	music.setLoop(true);
@@ -55,5 +55,11 @@ void Level::update(float dt, float elapsedTime){
 	if (elapsedTime > startDelay && !(music.getStatus() == sf::Music::Playing)){
 		music.play();
 	}
+
+	//printf("%f\n", music.getPlayingOffset() / music.getDuration() * 100);
+}
+
+void Level::restartMusic() {
+	music.play();
 }
 

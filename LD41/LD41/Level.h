@@ -7,7 +7,10 @@
 class Level
 {
 public:
-	Level();
+
+
+
+	Level(std::string dir);
 	~Level();
 
 	std::vector<GameObject*> gameObjects;
@@ -23,6 +26,8 @@ public:
 	void drawLevel(sf::RenderWindow & window);
 
 	void update(float dt, float elapsedTime);
+
+	void restartMusic();
 
 private:
 

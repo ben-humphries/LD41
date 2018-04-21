@@ -11,6 +11,7 @@ GameObject::GameObject(std::string dir) {
 	texture.loadFromFile(dir);
 	sprite.setTexture(texture);
 	collider = sprite.getLocalBounds();
+	collider.width += 5;
 }
 
 

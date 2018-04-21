@@ -4,7 +4,7 @@
 class Player : public GameObject
 {
 public:
-	Player();
+	Player(std::string dir);
 	~Player();
 
 	void update(float dt);

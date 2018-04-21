@@ -2,9 +2,11 @@
 
 bool jumpEnded = false;
 
-Player::Player()
+Player::Player(std::string dir)
 {
-	texture.loadFromFile("player.png");
+	if (!texture.loadFromFile("player.png")) {
+		printf("Could not load player texture");
+	}
 	sprite.setTexture(texture);
 	collider = sprite.getLocalBounds();
 
@@ -46,6 +48,7 @@ void Player::handleInput(sf::Event e) {
 
 	if (e.type == sf::Event::KeyPressed) {
 		if (e.key.code == sf::Keyboard::Space || e.key.code == sf::Keyboard::Up) {
+			printf("%i", state);
 
 			if (state == Grounded && !jumping) {
 				velocity.y = -800;
@@ -57,7 +60,7 @@ void Player::handleInput(sf::Event e) {
 			printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
 		}
 	}
-	else if (e.type == sf::Event::KeyReleased) {
+	if (e.type == sf::Event::KeyReleased) {
 		if (e.key.code == sf::Keyboard::Space || e.key.code == sf::Keyboard::Up) {
 			jumpEnded = true;
 		}
@@ -70,13 +73,14 @@ sf::Vector2i Player::boundCollision(GameObject * g) {
 
 	if (collision.y == 1) {
 		state = Grounded;
-
 		if (jumping) {
 			velocity.y = -800;
 			jumping = false;
 		}
-		else
+		else {
 			velocity.y = 0;
+			jumpEnded = true;
+		}
 	}
 	else if (collision.y == 0 && velocity.y != 0) {
 		state = Jumping;

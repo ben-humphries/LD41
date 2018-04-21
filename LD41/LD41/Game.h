@@ -7,6 +7,19 @@
 class Game
 {
 public:
+
+	struct LevelInfo {
+
+		std::vector<sf::Vector2f> platformPositions;
+		std::string musicDir;
+		std::string playerSpriteDir;
+		std::string platformSpriteDir;
+		std::string backgroundSpriteDir;
+		std::string deathSpriteDir;
+		float playerSpeed;
+	};
+
+	static std::vector<LevelInfo> levels;
 	
 	static void Start();
 	static void Update();
