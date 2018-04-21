@@ -13,6 +13,8 @@ public:
 	sf::Texture texture;
 	sf::FloatRect collider;
 
+	sf::Color color;
+
 
 	virtual void update();
 

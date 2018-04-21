@@ -8,11 +8,10 @@ GameObject::GameObject()
 
 GameObject::GameObject(std::string dir) {
 
-	printf("here");
 	texture.loadFromFile(dir);
 	sprite.setTexture(texture);
 	sprite.setScale(5, 5);
-	collider = sprite.getLocalBounds();
+	collider = sf::FloatRect(0, 0, 64 * 5, 20 * 5);
 }
 
 
@@ -62,6 +61,9 @@ sf::Vector2i GameObject::boundCollision(GameObject * g) {
 
 	if ((left || right) && (top || bottom)) {
 
+		g->color = sf::Color::Red;
+		g->sprite.setColor(color);
+
 		float overlapX;
 		float overlapY;
 
@@ -81,6 +83,7 @@ sf::Vector2i GameObject::boundCollision(GameObject * g) {
 		else {
 			overlapY = (col2.top + col2.height) - col1.top;
 			collision.y = -1;
+
 		}
 
 
