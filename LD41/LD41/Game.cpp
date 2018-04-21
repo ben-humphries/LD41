@@ -2,9 +2,11 @@
 
 sf::RenderWindow Game::window;
 
+clock_t Game::t;
+
 bool running = true;
 
-GameObject g;
+Player p;
 
 void Game::Start() {
 
@@ -16,23 +18,31 @@ void Game::Start() {
 		Update();
 	}
 
-	g = GameObject();
+	p = Player();
 }
 
 void Game::Update() {
 
-	g.update();
-
+	//calculate dt
+	float dt = ((float)(clock() - t)) / CLOCKS_PER_SEC;
+	t = clock();
 
 	sf::Event e;
 	while (window.pollEvent(e)) {
+
+		p.handleInput(e);
+
 		if (e.type == sf::Event::Closed) {
 			running = false;
 		}
 	}
 
+
+	p.update(dt);
+
+
 	window.clear();
-	window.draw(g);
+	window.draw(p);
 	window.display();
 
 }

@@ -4,8 +4,8 @@
 
 GameObject::GameObject()
 {
-	texture.loadFromFile("test.png");
-	sprite.setTexture(texture);
+	//texture.loadFromFile("test.png");
+	//sprite.setTexture(texture);
 
 }
 
