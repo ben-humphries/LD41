@@ -17,6 +17,8 @@ public:
 
 	sf::Vector2f acceleration, velocity;
 
+	virtual sf::Vector2i boundCollision(GameObject * g);
+
 private:
 
 	void applyGravity(float dt);

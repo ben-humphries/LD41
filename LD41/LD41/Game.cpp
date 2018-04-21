@@ -6,7 +6,8 @@ clock_t Game::t;
 
 bool running = true;
 
-Player p;
+Player * p;
+GameObject * g;
 
 void Game::Start() {
 
@@ -14,11 +15,20 @@ void Game::Start() {
 	window.create(sf::VideoMode(800, 600, 32), "LD41", sf::Style::Close);
 	window.setKeyRepeatEnabled(false);
 
+	p = new Player();
+	std::string dir = "ground.png";
+	g = new GameObject(dir);
+	g->setPosition(sf::Vector2f(0, 550));
+
+	p->collider = sf::FloatRect(0, 0, 16 * 5, 16 * 5);
+
+
+
+
 	while (running) {
 		Update();
 	}
 
-	p = Player();
 }
 
 void Game::Update() {
@@ -30,19 +40,21 @@ void Game::Update() {
 	sf::Event e;
 	while (window.pollEvent(e)) {
 
-		p.handleInput(e);
+		p->handleInput(e);
 
 		if (e.type == sf::Event::Closed) {
 			running = false;
 		}
 	}
 
+	p->boundCollision(g);
 
-	p.update(dt);
+	p->update(dt);
 
 
 	window.clear();
-	window.draw(p);
+	window.draw(*p);
+	window.draw(*g);
 	window.display();
 
 }
