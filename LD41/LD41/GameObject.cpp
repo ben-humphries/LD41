@@ -10,8 +10,7 @@ GameObject::GameObject(std::string dir) {
 
 	texture.loadFromFile(dir);
 	sprite.setTexture(texture);
-	sprite.setScale(5, 5);
-	collider = sf::FloatRect(0, 0, 64 * 5, 20 * 5);
+	collider = sprite.getLocalBounds();
 }
 
 
@@ -20,7 +19,7 @@ GameObject::~GameObject()
 }
 
 void GameObject::update() {
-
+	sprite.setColor(color);
 }
 
 
@@ -61,8 +60,8 @@ sf::Vector2i GameObject::boundCollision(GameObject * g) {
 
 	if ((left || right) && (top || bottom)) {
 
-		g->color = sf::Color::Red;
-		g->sprite.setColor(color);
+		//g->color = sf::Color(255,255,255,0);
+		//g->sprite.setColor(g->color);
 
 		float overlapX;
 		float overlapY;

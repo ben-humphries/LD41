@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "SFML/Audio.hpp"
 
-class Level : public sf::Drawable
+class Level
 {
 public:
 	Level();
@@ -15,15 +15,23 @@ public:
 	void addGameObject(GameObject * g);
 	void addGameObject(GameObject * g, sf::Vector2f position);
 
+	void setBackground(std::string dir);
+	sf::Sprite background;
+
 	void boundCollisionsWithPlayer(Player * p);
 
 	void drawLevel(sf::RenderWindow & window);
+
+	void update(float dt, float elapsedTime);
 
 private:
 
 	sf::Music music;
 
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	sf::Texture backgroundTexture;
+
+	float startDelay = 0;
+
 	
 };
 

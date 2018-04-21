@@ -6,7 +6,9 @@ Player::Player()
 {
 	texture.loadFromFile("player.png");
 	sprite.setTexture(texture);
-	sprite.setScale(5, 5);
+	collider = sprite.getLocalBounds();
+
+	color = sf::Color(255, 255, 255, 255);
 
 	state == Grounded;
 
@@ -52,7 +54,7 @@ void Player::handleInput(sf::Event e) {
 				jumpEnded = false;
 			}
 
-			printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2);
+			printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
 		}
 	}
 	else if (e.type == sf::Event::KeyReleased) {

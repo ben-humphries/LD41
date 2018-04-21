@@ -9,12 +9,21 @@ Level::Level()
 	}
 	music.setLoop(true);
 	music.setVolume(5);
-	music.play();
+	//music.play();
+
 }
 
 
 Level::~Level()
 {
+}
+
+void Level::setBackground(std::string dir) {
+	
+	if (!backgroundTexture.loadFromFile(dir)) {
+		printf("could not load background texture");
+	}
+	background.setTexture(backgroundTexture);
 }
 
 
@@ -37,12 +46,14 @@ void Level::drawLevel(sf::RenderWindow & window) {
 	for (int i = 0; i < gameObjects.size(); i++) {
 		window.draw(*gameObjects.at(i));
 	}
+
 }
 
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-	for (int i = 0; i < gameObjects.size(); i++) {
-		target.draw(gameObjects.at(i)->sprite);
+void Level::update(float dt, float elapsedTime){
+	
+	if (elapsedTime > startDelay && !(music.getStatus() == sf::Music::Playing)){
+		music.play();
 	}
- }
+}
 
