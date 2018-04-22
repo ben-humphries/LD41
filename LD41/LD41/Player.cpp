@@ -23,6 +23,8 @@ Player::~Player()
 
 void Player::update(float dt) {
 
+	//printf("jumpEnded: %i state: %i\n", jumpEnded, state);
+
 
 	applyGravity(dt);
 
@@ -35,36 +37,54 @@ void Player::update(float dt) {
 }
 
 void Player::applyGravity(float dt) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !jumpEnded) {
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		if (state == Grounded && jumpEnded) {
+			jumpEnded = false;
+			jumping = true;
+			this->velocity.y = -800;
+			this->move(0, -5);
+			state = Jumping;
+		}
+		
+	}
+	else {
+		jumpEnded = true;
+	}
+
+	if (!jumpEnded) {
 		this->acceleration = sf::Vector2f(0, 1500);
+
 	}
 	else {
 		this->acceleration = sf::Vector2f(0, 2500);
 	}
+
 	this->velocity += acceleration * dt;
+
 }
 
 void Player::handleInput(sf::Event e) {
 
 	if (e.type == sf::Event::KeyPressed) {
 		if (e.key.code == sf::Keyboard::Space || e.key.code == sf::Keyboard::Up) {
-			printf("%i", state);
+			//printf("%i", state);
 
-			if (state == Grounded && !jumping) {
+			/*if (state == Grounded && !jumping) {
 				velocity.y = -800;
 				state = Jumping;
 				jumping = true;
 				jumpEnded = false;
-			}
+			}*/
 
-			printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
+			//printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
 		}
 	}
-	if (e.type == sf::Event::KeyReleased) {
+	/*if (e.type == sf::Event::KeyReleased) {
 		if (e.key.code == sf::Keyboard::Space || e.key.code == sf::Keyboard::Up) {
 			jumpEnded = true;
 		}
-	}
+	}*/
 	
 }
 
@@ -73,14 +93,14 @@ sf::Vector2i Player::boundCollision(GameObject * g) {
 
 	if (collision.y == 1) {
 		state = Grounded;
-		if (jumping) {
-			velocity.y = -800;
-			jumping = false;
-		}
-		else {
+		//if (jumping) {
+		//	velocity.y = -800;
+		//	jumping = false;
+		//}
+		//else {
 			velocity.y = 0;
-			jumpEnded = true;
-		}
+			//jumpEnded = true;
+		//}
 	}
 	else if (collision.y == 0 && velocity.y != 0) {
 		state = Jumping;
