@@ -20,7 +20,7 @@ sf::Texture deathTex;
 sf::Sprite deathSprite;
 
 Level * level;
-int levelNumber = 1;
+int levelNumber = 0;
 
 
 void Game::Start() {
@@ -32,12 +32,13 @@ void Game::Start() {
 	//LEVEL 1
 	l.backgroundSpriteDir = "background.png";
 	l.musicDir = "test.ogg";
-	l.platformPositions = { sf::Vector2f(899.201050 - 320*3, 500), sf::Vector2f(899.201050 - 320*2, 500), sf::Vector2f(899.201050 - 320, 500), sf::Vector2f(899.201050, 500), sf::Vector2f(1939.329834, 500), sf::Vector2f(2998.356201, 500), sf::Vector2f(4037.853027, 500), sf::Vector2f(5095.143066, 500), sf::Vector2f(6141.230469, 500), sf::Vector2f(7180.314453, 500), sf::Vector2f(8249.509766, 500), sf::Vector2f(9282.297852, 500), sf::Vector2f(9810.244141, 500), sf::Vector2f(10847.933594, 500), sf::Vector2f(11369.579102, 500), sf::Vector2f(12441.577148, 500), sf::Vector2f(12948.518555, 500), sf::Vector2f(13477.866211, 500), sf::Vector2f(13985.506836, 500), sf::Vector2f(14970.809570, 500), sf::Vector2f(15464.447266, 500), sf::Vector2f(16439.927734, 500), sf::Vector2f(17032.177734, 500), sf::Vector2f(17562.189453, 500), sf::Vector2f(18075.425781, 500), sf::Vector2f(18623.615234, 500), sf::Vector2f(19684.333984, 500), sf::Vector2f(20743.656250, 500), sf::Vector2f(21250.595703, 500), sf::Vector2f(21765.226563, 500), sf::Vector2f(22285.451172, 500), sf::Vector2f(23304.917969, 500), sf::Vector2f(23862.898438, 500), sf::Vector2f(24832.021484, 500), sf::Vector2f(24832.021484 + 320, 500)
+	l.platformPositions = { sf::Vector2f(899.201050 - 320*3, 500), sf::Vector2f(899.201050 - 320*2, 500), sf::Vector2f(899.201050 - 320, 500), sf::Vector2f(899.201050, 500), sf::Vector2f(1939.329834, 500), sf::Vector2f(2998.356201, 500), sf::Vector2f(4037.853027, 500), sf::Vector2f(5095.143066, 500), sf::Vector2f(6141.230469, 500), sf::Vector2f(7180.314453, 500), sf::Vector2f(8249.509766, 500), sf::Vector2f(9282.297852, 500), sf::Vector2f(9810.244141, 500), sf::Vector2f(10847.933594, 500), sf::Vector2f(11369.579102, 500), sf::Vector2f(12441.577148, 500), sf::Vector2f(12948.518555, 500), sf::Vector2f(13477.866211, 500), sf::Vector2f(13985.506836, 500), sf::Vector2f(14970.809570, 500), sf::Vector2f(15464.447266, 500), sf::Vector2f(16539.927734, 500), sf::Vector2f(17032.177734, 500), sf::Vector2f(17562.189453, 500), sf::Vector2f(18075.425781, 500), sf::Vector2f(18623.615234, 500), sf::Vector2f(19684.333984, 500), sf::Vector2f(20743.656250, 500), sf::Vector2f(21250.595703, 500), sf::Vector2f(21765.226563, 500), sf::Vector2f(22285.451172, 500), sf::Vector2f(23304.917969, 500), sf::Vector2f(23862.898438, 500), sf::Vector2f(24832.021484, 500), sf::Vector2f(24832.021484 + 320, 500)
 	};
 	l.platformSpriteDir = "ground.png";
 	l.playerSpriteDir = "player.png";
 	l.deathSpriteDir = "death.png";
 	l.playerSpeed = 700;
+	l.finishPosition = sf::Vector2f(25600, 0);
 
 	levels.push_back(l);
 
@@ -52,6 +53,7 @@ void Game::Start() {
 	l2.playerSpriteDir = "player.png";
 	l2.deathSpriteDir = "death.png";
 	l2.playerSpeed = 700;
+	l2.finishPosition = sf::Vector2f(39000, 0);
 
 	levels.push_back(l2);
 
@@ -63,7 +65,7 @@ void Game::Start() {
 	level = new Level(levels[levelNumber].musicDir);
 	p = new Player(levels[levelNumber].playerSpriteDir);
 	finish = new GameObject("finish.png");
-	finish->setPosition(25600, 0);
+	finish->setPosition(levels[levelNumber].finishPosition);
 	
 	level->setBackground(levels[levelNumber].backgroundSpriteDir);
 

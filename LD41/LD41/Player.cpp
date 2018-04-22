@@ -57,7 +57,7 @@ void Player::applyGravity(float dt) {
 
 	}
 	else {
-		this->acceleration = sf::Vector2f(0, 2500);
+		this->acceleration = sf::Vector2f(0, 3000);
 	}
 
 	this->velocity += acceleration * dt;
@@ -77,7 +77,7 @@ void Player::handleInput(sf::Event e) {
 				jumpEnded = false;
 			}*/
 
-			//printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
+			printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
 		}
 	}
 	/*if (e.type == sf::Event::KeyReleased) {

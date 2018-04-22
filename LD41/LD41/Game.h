@@ -17,6 +17,7 @@ public:
 		std::string backgroundSpriteDir;
 		std::string deathSpriteDir;
 		float playerSpeed;
+		sf::Vector2f finishPosition;
 	};
 
 	static std::vector<LevelInfo> levels;
