@@ -8,8 +8,20 @@ Level::Level(std::string dir)
 		printf("could not open music file");
 	}
 	music.setLoop(true);
-	music.setVolume(5);
+	music.setVolume(10);
 	//music.play();
+
+	if (!font.loadFromFile("res/impact.ttf")) {
+		printf("Could not load font");
+	}
+
+	percentageText.setFont(font);
+	percentageText.setCharacterSize(40);
+	percentageText.setStyle(sf::Text::Regular);
+
+	percentageText.setPosition(-100, 100);
+	percentageText.setOutlineColor(sf::Color(150, 150, 150, 255));
+	percentageText.setOutlineThickness(3);
 
 }
 
@@ -47,6 +59,8 @@ void Level::drawLevel(sf::RenderWindow & window) {
 		window.draw(*gameObjects.at(i));
 	}
 
+	window.draw(percentageText);
+
 }
 
 
@@ -56,10 +70,22 @@ void Level::update(float dt, float elapsedTime){
 		music.play();
 	}
 
-	//printf("%f\n", music.getPlayingOffset() / music.getDuration() * 100);
+}
+
+void Level::updateText(sf::Vector2f playerPosition, sf::Vector2f finishPosition) {
+	std::string text = std::to_string((int)(playerPosition.x / finishPosition.x * 100));
+	percentageText.setString(text + "%");
+}
+
+void Level::setTextPosition(sf::Vector2f v) {
+	percentageText.setPosition(v);
 }
 
 void Level::restartMusic() {
 	music.play();
+}
+
+void Level::stopMusic() {
+	music.stop();
 }
 

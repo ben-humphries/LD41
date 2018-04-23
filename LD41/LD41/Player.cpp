@@ -4,7 +4,7 @@ bool jumpEnded = false;
 
 Player::Player(std::string dir)
 {
-	if (!texture.loadFromFile("player.png")) {
+	if (!texture.loadFromFile(dir)) {
 		printf("Could not load player texture");
 	}
 	sprite.setTexture(texture);
@@ -77,7 +77,7 @@ void Player::handleInput(sf::Event e) {
 				jumpEnded = false;
 			}*/
 
-			printf("sf::Vector2f(%f, 500), ", this->getPosition().x - 64 * 5 / 2 - 100);
+			//printf("sf::Vector2f(%f, %f), ", this->getPosition().x - 64 * 5 / 2 - 50, static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 250 + 250);
 		}
 	}
 	/*if (e.type == sf::Event::KeyReleased) {

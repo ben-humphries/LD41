@@ -8,7 +8,8 @@ class Level
 {
 public:
 
-
+	sf::Font font;
+	sf::Text percentageText;
 
 	Level(std::string dir);
 	~Level();
@@ -27,7 +28,11 @@ public:
 
 	void update(float dt, float elapsedTime);
 
+	void updateText(sf::Vector2f playerPosition, sf::Vector2f finishPosition);
+	void setTextPosition(sf::Vector2f v);
+
 	void restartMusic();
+	void stopMusic();
 
 private:
 

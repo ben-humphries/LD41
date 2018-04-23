@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Level.h"
+#include "MainMenu.h"
 
 class Game
 {
@@ -24,9 +25,12 @@ public:
 	
 	static void Start();
 	static void Update();
+	static void LoadLevel(int levelNumber);
 
 	static sf::RenderWindow window;
 	static sf::View view;
+
+	static int levelNumber;
 
 
 private:
